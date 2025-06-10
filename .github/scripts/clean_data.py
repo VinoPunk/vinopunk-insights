@@ -150,5 +150,6 @@ def main():
     df_cleaned.to_csv(output_path, index=False)
     print(f"✅ Cleaned data saved to: {output_path}")
 
+
 if __name__ == "__main__":
     main()
