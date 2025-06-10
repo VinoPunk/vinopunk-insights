@@ -4,12 +4,8 @@ import re
 import csv
 import copy
 
-csv_path = 'raw/full_wine_list.csv'
-output_path = 'data/clean/cleaned_wine_list.csv'
-
-
-# Load the raw CSV
-df = pd.read_csv(csv_path)
+#csv_path = 'raw/full_wine_list.csv'
+#output_path = 'data/clean/cleaned_wine_list.csv'
 
 def convert_to_int(v):
     if pd.isna(v):
@@ -135,8 +131,24 @@ def cleaning_process(df):
     clean_df=copy.deepcopy(df)
     return clean_df
 
-#cleaning process
-df=cleaning_process(df)
+# ========== Main Entry Point ==========
 
-#output to csv
-df.to_csv(output_path, index=False)
+def main():
+    if len(sys.argv) != 3:
+        print("Usage: python clean_data.py input.csv output.csv")
+        sys.exit(1)
+
+    input_path = sys.argv[1]
+    output_path = sys.argv[2]
+
+    print(f"📥 Loading: {input_path}")
+    df = pd.read_csv(input_path)
+
+    df_cleaned = cleaning_process(df)
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    df_cleaned.to_csv(output_path, index=False)
+    print(f"✅ Cleaned data saved to: {output_path}")
+
+if __name__ == "__main__":
+    main()
