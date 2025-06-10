@@ -1,1 +1,28 @@
+name: Clean Wine Data
 
+on:
+  push:
+    paths:
+      - 'raw/**.csv'  # Only run when CSV files in /raw are updated
+      - '.github/scripts/clean_data.py'
+  workflow_dispatch:  # Also allow manual runs
+
+jobs:
+  clean-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install dependencies
+        run: pip install pandas
+
+      - name: 🧼 Run data cleaning script
+        run: |
+          python .github/scripts/clean_data.py raw/full_wine_list.csv data/clean/cleaned_wine_list.csv
