@@ -3,7 +3,7 @@ name: Clean Wine Data
 on:
   push:
     paths:
-      - 'data/raw/**.csv'  # Only run when CSV files in /raw are updated
+      - '_data/raw/**.csv'  # Only run when CSV files in /raw are updated
       - '.github/scripts/clean_data.py'
   workflow_dispatch:  # Also allow manual runs
 
@@ -25,5 +25,5 @@ jobs:
 
       - name: 🧼 Run data cleaning script
         run: |
-          python .github/scripts/clean_data.py data/raw/full_wine_list.csv data/clean/cleaned_wine_list.csv
+          python .github/scripts/clean_data.py _data/raw/full_wine_list.csv _data/clean/cleaned_wine_list.csv
 
