@@ -3,6 +3,7 @@ import pandas as pd
 import re
 import csv
 import copy
+import sys
 
 #csv_path = 'raw/full_wine_list.csv'
 #output_path = 'data/clean/cleaned_wine_list.csv'
@@ -132,7 +133,6 @@ def cleaning_process(df):
     return clean_df
 
 # ========== Main Entry Point ==========
-
 def main():
     if len(sys.argv) != 3:
         print("Usage: python clean_data.py input.csv output.csv")
